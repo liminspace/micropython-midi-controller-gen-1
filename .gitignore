@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# IDE
+.idea/
+
+# local configurations
+.python-version
+
+# micropython repo
+micropython-*.zip
+micropython-*/
+
+# dist
+dist/
+
+# tmp
+tmp/

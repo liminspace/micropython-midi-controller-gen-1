@@ -1,0 +1,39 @@
+base_path:  # if not set then current pwd is used
+
+collector:
+  # related to base_path
+  source_path: src/
+
+  # patterns related to source_path
+  ignore:
+    - dev/
+
+  # related to base_path
+  dist_path: dist/
+
+# https://docs.micropython.org/en/latest/reference/mpyfiles.html
+mpy_compiler:
+  cli_path: micropython-1.19.1/mpy-cross/mpy-cross
+  emit: bytecode  # -X emit=bytecode
+  heapsize: 2097152  # -X heapsize=2097152
+  arch: armv6m  # -march=armv6m
+  # https://docs.micropython.org/en/latest/library/micropython.html#micropython.opt_level
+  optimization_level: 2  # -O1
+  small_int_bits: 8
+
+  # related to collector.dist_path
+  include:
+  exclude:
+    - main.py
+    - config.py
+    - banks/
+
+  remove_sources: true
+
+on_board:
+  # related to root on board fs
+  meta_file_path: .boardman.json
+
+  # patterns related to root on board fs
+  delete_ignore:
+    - .config.json
