@@ -3,8 +3,8 @@
 ```bash
 python_ver=3.9.13 \
  && proj_ve_name=midi-controller-2-buttons-v1 \
- && pyenv install $upython_ver \
- && pyenv virtualenv $upython_ver $proj_ve_name \
+ && pyenv install $python_ver \
+ && pyenv virtualenv $python_ver $proj_ve_name \
  && pyenv local $proj_ve_name \
  && poetry install
 ```
@@ -13,7 +13,7 @@ python_ver=3.9.13 \
 
 Install plugin MicroPython
 Go settings: Editor -> Inspections -> Python -> Code is incompatible with specific Python versions
-Enable the options and set 3.5.
+Enable the options and set 3.6.
 
 
 ## MPY-Cross

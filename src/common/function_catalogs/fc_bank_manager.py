@@ -6,7 +6,7 @@ from common.function_catalogs.base import FunctionCatalogBankManagerBase
 if False:  # sourcery skip: remove-redundant-if
     from typing import Any
 
-    from common.action_executors import ActionState
+    from common.command_executors import CommandStateGroup
 
 
 class BankFunctionCatalog(FunctionCatalogBankManagerBase):
@@ -31,7 +31,7 @@ class BankFunctionCatalog(FunctionCatalogBankManagerBase):
         return await self.switch_bank_by_index_incrementor(val=-1)
 
 
-class GlobalStateFunctionCatalog(FunctionCatalogBankManagerBase):
+class GlobalStateGroupFunctionCatalog(FunctionCatalogBankManagerBase):
     NAME = "STATE"
     FUNCTIONS_MAP = {
         "CALL_NEXT": "call_next_global_state",
@@ -41,23 +41,23 @@ class GlobalStateFunctionCatalog(FunctionCatalogBankManagerBase):
 
     @micropython.native
     async def _function_wrapper(self, func, **kwargs) -> Any:
-        state_id = kwargs.pop("id")
-        state = self._bank_manager.global_states[state_id]
-        return await func(state=state, **kwargs)
+        state_group_id = kwargs.pop("id")
+        state_group = self._bank_manager.global_state_groups[state_group_id]
+        return await func(state_group=state_group, **kwargs)
 
     @micropython.native
-    async def call_next_global_state(self, state: ActionState) -> None:
-        await state()
+    async def call_next_global_state(self, state_group: CommandStateGroup) -> None:
+        await state_group()
         return None
 
     @micropython.native
-    async def call_prev_global_state(self, state: ActionState) -> None:
-        await state(ix_inc=-1)
+    async def call_prev_global_state(self, state_group: CommandStateGroup) -> None:
+        await state_group(ix_inc=-1)
         return None
 
     @micropython.native
-    async def set_initial_global_state(self, state: ActionState) -> None:
-        state.reset()
+    async def set_initial_global_state(self, state_group: CommandStateGroup) -> None:
+        state_group.reset()
         return None
 
 

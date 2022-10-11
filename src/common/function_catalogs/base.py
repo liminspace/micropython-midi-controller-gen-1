@@ -45,7 +45,7 @@ class FunctionCatalogBase:
         return await task
 
     @micropython.native
-    def get_action_func(self, name: str) -> callable:
+    def get_command_func(self, name: str) -> callable:
         func = self._get_func_by_name(name=name)
         return async_partial(self._execute_func, func=func)
 

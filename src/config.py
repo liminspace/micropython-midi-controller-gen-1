@@ -1,13 +1,13 @@
 # noinspection PyUnreachableCode
 if False:  # sourcery skip: remove-redundant-if
-    from typing import Any, Dict, List, Tuple
+    from typing import Any, Dict, List
 
-BANKS_PATH = "banks.line6_hx_stomp.default_profile"
-# BANKS_PATH = "banks.digitech_whammy_5.default_profile"
+PROFILE_PATH = "bank_profiles.line6_hx_stomp.profile_1"
+# PROFILE_PATH = "bank_profiles.digitech_whammy_5.profile_1"
 
 
 DEBUG: bool = False
-IGNORE_ACTION_ERRORS: bool = False
+IGNORE_COMMAND_ERRORS: bool = False
 
 BOARD_BUTTONS: Dict[str, Dict[str, Any]] = {
     "A": {
@@ -81,21 +81,24 @@ BOARD_OUT_MIDIS: Dict[str, Dict[str, Any]] = {
     },
 }
 
-ACTIONS_ON_BOOT: List[Tuple] = [  #
+COMMANDS_ON_BOOT: List[Dict] = [  #
     # list of commands like in banks' files
     # will be performed only after success init
-    # ('', 'LED:ON', {'id': 'SYS'}),
-    # ('', 'TIME:SLEEP', {'value': 500}),
-    ("", "LED:BLINK", {"id": "SYS", "on_time": 0, "fade_in_time": 0.2, "off_time": 0, "n": 1, "fps": 50}),
-    # ('', 'TIME:SLEEP', {'val': 1000}),
-    # ('', 'LED:OFF', {'id': 'SYS'}),
-    # ('', 'RGB_LED:COLOR', {'id': '1', 'val': (255, 0, 0, 0.1)}),
-    # ('', 'MIDI:CC', {'num': 69, 'val': 8}),
-    # ('', 'TIME:SLEEP', {'val': 300}),
-    # ('', 'RGB_LED:COLOR', {'id': '1', 'val': (0, 255, 0, 0.1)}),
-    # ('', 'MIDI:CC', {'num': 69, 'val': 8}),
-    # ('', 'TIME:SLEEP', {'val': 300}),
-    # ('', 'RGB_LED:COLOR', {'id': '1', 'val': (0, 0, 255, 0.1)}),
-    # ('', 'MIDI:CC', {'num': 69, 'val': 8}),
-    # ('', 'TIME:SLEEP', {'val': 300}),
+    # {"FUNC": "LED:ON", "ARGS": {"id": "SYS"}},
+    # {"FUNC": "TIME:SLEEP", "ARGS": {"value": 500}},
+    {
+        "FUNC": "LED:BLINK",
+        "ARGS": {"id": "SYS", "on_time": 0, "fade_in_time": 0.2, "off_time": 0, "n": 1, "fps": 50},
+    },
+    # {"FUNC": "TIME:SLEEP", "ARGS": {"val": 1000}},
+    # {"FUNC": "LED:OFF", "ARGS": {"id": "SYS"}},
+    # {"FUNC": "RGB_LED:COLOR", "ARGS": {"id": "1", "val": (255, 0, 0, 0.1)}},
+    # {"FUNC": "MIDI:CC", "ARGS": {"num": 69, "val": 8}},
+    # {"FUNC": "TIME:SLEEP", "ARGS": {"val": 300}},
+    # {"FUNC": "RGB_LED:COLOR", "ARGS": {"id": "1", "val": (0, 255, 0, 0.1)}},
+    # {"FUNC": "MIDI:CC", "ARGS": {"num": 69, "val": 8}},
+    # {"FUNC": "TIME:SLEEP", "ARGS": {"val": 300}},
+    # {"FUNC": "RGB_LED:COLOR", "ARGS": {"id": "1", "val": (0, 0, 255, 0.1)}},
+    # {"FUNC": "MIDI:CC", "ARGS": {"num": 69, "val": 8}},
+    # {"FUNC": "TIME:SLEEP", "ARGS": {"val": 300}},
 ]
