@@ -329,6 +329,58 @@ BANK_4 = {
     },
 }
 
+
+BANK_5 = {
+    "META:NAME": "Led Strip Test",
+    "ON:ENTER": [
+        {
+            "FUNC": "LED:BLINK",
+            "ARGS": {"id": "SYS", "on_time": 0, "fade_in_time": 0.15, "off_time": 0, "n": 5, "fps": 50},
+        },
+        LED_CYAN_CMD,
+    ],
+    "ON:EXIT": [],
+    "BTN:A": {
+        "ON:PRESS": [
+            {"CMD": [{"FUNC": "RGB_LED_STRIP:COLOR", "ARGS": {"id": "1", "ix": 0, "val": (255, 0, 0)}}]},
+            {"CMD": [{"FUNC": "RGB_LED_STRIP:COLOR", "ARGS": {"id": "1", "ix": 1, "val": (255, 0, 0)}}]},
+            {"CMD": [{"FUNC": "RGB_LED_STRIP:COLOR", "ARGS": {"id": "1", "ix": 2, "val": (255, 0, 0)}}]},
+            {"CMD": [{"FUNC": "RGB_LED_STRIP:COLOR", "ARGS": {"id": "1", "ix": 3, "val": (255, 0, 0)}}]},
+            {"CMD": [{"FUNC": "RGB_LED_STRIP:COLOR", "ARGS": {"id": "1", "ix": 4, "val": (255, 0, 0)}}]},
+            {"CMD": [{"FUNC": "RGB_LED_STRIP:COLOR", "ARGS": {"id": "1", "ix": 5, "val": (255, 0, 0)}}]},
+            {"CMD": [{"FUNC": "RGB_LED_STRIP:COLOR", "ARGS": {"id": "1", "ix": 0, "val": (0, 255, 0)}}]},
+            {"CMD": [{"FUNC": "RGB_LED_STRIP:COLOR", "ARGS": {"id": "1", "ix": 1, "val": (0, 255, 0)}}]},
+            {"CMD": [{"FUNC": "RGB_LED_STRIP:COLOR", "ARGS": {"id": "1", "ix": 2, "val": (0, 255, 0)}}]},
+            {"CMD": [{"FUNC": "RGB_LED_STRIP:COLOR", "ARGS": {"id": "1", "ix": 3, "val": (0, 255, 0)}}]},
+            {"CMD": [{"FUNC": "RGB_LED_STRIP:COLOR", "ARGS": {"id": "1", "ix": 4, "val": (0, 255, 0)}}]},
+            {"CMD": [{"FUNC": "RGB_LED_STRIP:COLOR", "ARGS": {"id": "1", "ix": 5, "val": (0, 255, 0)}}]},
+            {"CMD": [{"FUNC": "RGB_LED_STRIP:COLOR", "ARGS": {"id": "1", "ix": 0, "val": (0, 0, 255)}}]},
+            {"CMD": [{"FUNC": "RGB_LED_STRIP:COLOR", "ARGS": {"id": "1", "ix": 1, "val": (0, 0, 255)}}]},
+            {"CMD": [{"FUNC": "RGB_LED_STRIP:COLOR", "ARGS": {"id": "1", "ix": 2, "val": (0, 0, 255)}}]},
+            {"CMD": [{"FUNC": "RGB_LED_STRIP:COLOR", "ARGS": {"id": "1", "ix": 3, "val": (0, 0, 255)}}]},
+            {"CMD": [{"FUNC": "RGB_LED_STRIP:COLOR", "ARGS": {"id": "1", "ix": 4, "val": (0, 0, 255)}}]},
+            {"CMD": [{"FUNC": "RGB_LED_STRIP:COLOR", "ARGS": {"id": "1", "ix": 5, "val": (0, 0, 255)}}]},
+            {"CMD": [{"FUNC": "RGB_LED_STRIP:COLOR", "ARGS": {"id": "1", "ix": 0, "val": (0, 0, 0)}}]},
+            {"CMD": [{"FUNC": "RGB_LED_STRIP:COLOR", "ARGS": {"id": "1", "ix": 1, "val": (0, 0, 0)}}]},
+            {"CMD": [{"FUNC": "RGB_LED_STRIP:COLOR", "ARGS": {"id": "1", "ix": 2, "val": (0, 0, 0)}}]},
+            {"CMD": [{"FUNC": "RGB_LED_STRIP:COLOR", "ARGS": {"id": "1", "ix": 3, "val": (0, 0, 0)}}]},
+            {"CMD": [{"FUNC": "RGB_LED_STRIP:COLOR", "ARGS": {"id": "1", "ix": 4, "val": (0, 0, 0)}}]},
+            {"CMD": [{"FUNC": "RGB_LED_STRIP:COLOR", "ARGS": {"id": "1", "ix": 5, "val": (0, 0, 0)}}]},
+        ],
+    },
+    "BTN:B": {
+        "ON:PRESS": [
+            # {"CMD": [{"FUNC": "MIDI:PC", "ARGS": {"num": PC_CHORDS_UP_OCT_ACTIVE}}]},
+            # {"CMD": [{"FUNC": "MIDI:PC", "ARGS": {"num": PC_CHORDS_DOWN_OCT_ACTIVE}}]},
+        ],
+    },
+    "COMB:A+B": {
+        "ON:PRESS": [
+            {"CMD": [NEXT_BOARD_BANK_CMD]},
+        ],
+    },
+}
+
 profile_1 = {
     "GLOBAL_STATE_GROUPS": {
         "ACA": {
@@ -364,5 +416,6 @@ profile_1 = {
         BANK_2,
         BANK_3,
         BANK_4,
+        BANK_5,
     ],
 }

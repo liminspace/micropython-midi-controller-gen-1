@@ -52,6 +52,7 @@ class CommandExecutor:
         from common.function_catalogs.fc_led import LEDFunctionCatalog
         from common.function_catalogs.fc_midi import MIDIFunctionCatalog
         from common.function_catalogs.fc_rgbled import RGBLEDFunctionCatalog
+        from common.function_catalogs.fc_rgbledstrip import RGBLEDStripFunctionCatalog
 
         if self._board.leds:
             self.add_catalog(catalog=LEDFunctionCatalog(board=self._board))
@@ -59,6 +60,8 @@ class CommandExecutor:
             self.add_catalog(catalog=RGBLEDFunctionCatalog(board=self._board))
         if self._board.out_midis:
             self.add_catalog(catalog=MIDIFunctionCatalog(board=self._board))
+        if self._board.rgb_led_strips:
+            self.add_catalog(catalog=RGBLEDStripFunctionCatalog(board=self._board))
         return None
 
     @micropython.native

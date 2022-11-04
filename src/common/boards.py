@@ -9,6 +9,7 @@ if False:  # sourcery skip: remove-redundant-if
 
     from common.buttons import Button, ButtonCombination
     from common.midis import OutMIDI
+    from common.rgb_led_strips import RGBLedStrip
 
 
 class Board:
@@ -17,6 +18,7 @@ class Board:
     _button_combinations: Dict[Tuple, ButtonCombination]
     _leds: Dict[str, Union[PWMLED, DigitalLED]]
     _rgb_leds: Dict[str, RGBLED]
+    _rgb_led_strips: Dict[str, RGBLedStrip]
     _pots: Dict[str, Pot]
     _out_midis: Dict[str, OutMIDI]
     _out_midi_default: Optional[OutMIDI]
@@ -29,6 +31,7 @@ class Board:
         self._button_combinations = {}
         self._leds = self._init_leds(leds_config=config.BOARD_LEDS)
         self._rgb_leds = self._init_rgb_leds(rgb_leds_config=config.BOARD_RGB_LEDS)
+        self._rgb_led_strips = self._init_rgb_led_strips(rgb_led_strips_config=config.BOARD_RGB_LED_STRIPS)
         self._pots = self._init_pots(pots_config=config.BOARD_POTS)
         self._out_midi_default = None
         self._out_midis = self._init_out_midis(out_midis_config=config.BOARD_OUT_MIDIS)
@@ -48,6 +51,10 @@ class Board:
     @property
     def rgb_leds(self) -> Dict[str, RGBLED]:
         return self._rgb_leds
+
+    @property
+    def rgb_led_strips(self) -> Dict[str, RGBLedStrip]:
+        return self._rgb_led_strips
 
     @property
     def pots(self) -> Dict[str, Pot]:
@@ -88,6 +95,9 @@ class Board:
         for rgb_led_id, rgb_led in self.rgb_leds.items():
             if f"rgb_led:{rgb_led_id}" not in self._reset_skip_set:
                 rgb_led.off()
+        for rgb_led_strip_id, rgb_led_strip in self.rgb_led_strips.items():
+            if f"rgb_led_strip:{rgb_led_strip_id}" not in self._reset_skip_set:
+                rgb_led_strip.off()
         return None
 
     def _init_buttons(self, buttons_config: Dict[str, Any]) -> Dict[str, "Button"]:
@@ -134,6 +144,22 @@ class Board:
             if rgb_led_config.get("reset_skip", False):
                 self._reset_skip_set.add(f"rgb_led:{rgb_led_id}")
         return rgb_leds
+
+    def _init_rgb_led_strips(self, rgb_led_strips_config: Dict[str, Any]) -> Dict[str, RGBLedStrip]:
+        from common.rgb_led_strips import RGBLedStrip
+
+        rgb_led_strips = {}
+        for rgb_led_strip_id, rgb_led_strip_config in rgb_led_strips_config.items():
+            rgb_led_strips[rgb_led_strip_id] = RGBLedStrip(
+                port=rgb_led_strip_config["port"],
+                length=rgb_led_strip_config["length"],
+                color_map=rgb_led_strip_config.get("color_map"),
+                name=f"RGBLedStrip_{rgb_led_strip_id}",
+                debug=self._debug,
+            )
+            if rgb_led_strip_config.get("reset_skip", False):
+                self._reset_skip_set.add(f"rgb_led_strip:{rgb_led_strip_id}")
+        return rgb_led_strips
 
     def _init_pots(self, pots_config: Dict[str, Any]) -> Dict[str, Pot]:
         from picozero import Pot

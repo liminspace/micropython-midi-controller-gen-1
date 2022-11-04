@@ -2,8 +2,8 @@
 if False:  # sourcery skip: remove-redundant-if
     from typing import Any, Dict, List
 
-PROFILE_PATH = "bank_profiles.line6_hx_stomp.profile_1"
-# PROFILE_PATH = "bank_profiles.digitech_whammy_5.profile_1"
+# PROFILE_PATH = "bank_profiles.line6_hx_stomp.profile_1"
+PROFILE_PATH = "bank_profiles.digitech_whammy_5.profile_1"
 
 
 DEBUG: bool = False
@@ -48,6 +48,15 @@ BOARD_RGB_LEDS: Dict[str, Dict[str, Any]] = {
         "active_high": False,  # if led has common cathode(-) use True; if common anode(+) use False; default True
         "pwm": True,  # set True to support dynamic brightness; default True
         "initial_value": (0.0, 0.0, 0.0, 0.1),  # RGB+brightness 0.0...1.0; default (0, 0, 0, 1)
+    },
+}
+
+BOARD_RGB_LED_STRIPS: Dict[str, Dict[str, Any]] = {
+    "1": {
+        "port": 28,
+        "length": 6,  # number of leds in the strip
+        "color_map": "GRB",  # default is RGB
+        "reset_skip": True,  # don't turn off when bank is changed
     },
 }
 
