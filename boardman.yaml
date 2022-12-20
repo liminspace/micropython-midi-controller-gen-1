@@ -1,10 +1,14 @@
-base_path:  # if not set then current pwd is used
+base_path:  # repo dir. if not set then current pwd is used
 
 collector:
+  # collecting files from sourced to dist directory
+
   # related to base_path
   source_path: src/
 
   # patterns related to source_path
+  # matched files and dirs will not be collected
+  # patterns like foo/* or foo/bar*.py can be used
   ignore:
     - dev/
 
@@ -13,7 +17,12 @@ collector:
 
 # https://docs.micropython.org/en/latest/reference/mpyfiles.html
 mpy_compiler:
+  # compiling py files into mpy
+
+  # path to the mpy-cross cli
   cli_path: micropython-1.19.1/mpy-cross/mpy-cross
+
+  # mpy-cross options
   emit: bytecode  # -X emit=bytecode
   heapsize: 2097152  # -X heapsize=2097152
   arch: armv6m  # -march=armv6m
@@ -21,19 +30,27 @@ mpy_compiler:
   optimization_level: 2  # -O1
   small_int_bits: 8
 
+  # include or exclude files to be compiled
   # related to collector.dist_path
+  # patterns like foo/* or foo/bar*.py can be used
   include:
   exclude:
     - main.py
     - config.py
     - bank_profiles/
 
+  # whether to remove sources of compiled files
   remove_sources: true
 
 on_board:
+  # uploading dist into a board
+
+  # path to metafile of boardman. it makes boardman works faster
   # related to root on board fs
   meta_file_path: .boardman.json
 
+  # needless files will be removed from a board, but some of them can be ignored
   # patterns related to root on board fs
-  delete_ignore:
+  # patterns like foo/* or foo/bar*.py can be used
+  ignore:
     - .config.json

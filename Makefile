@@ -5,7 +5,7 @@
 help:
 	@echo "Here can be some help"
 
-pre_commit:
+lint:
 	pre-commit run --all-files
 
 clean_pycache:
@@ -26,4 +26,4 @@ upload:
 reset_hard:
 	python -m tools.boardman reset-hard
 
-release: pre_commit clean_pycache collect mpy_compile upload reset_hard
+release: lint clean_pycache collect mpy_compile upload reset_hard

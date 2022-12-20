@@ -8,7 +8,6 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.9"
-pip = "^22.3"
 
 [tool.poetry.group.dev.dependencies]
 adafruit-ampy = "<1.2"

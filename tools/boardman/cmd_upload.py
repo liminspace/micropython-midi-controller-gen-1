@@ -100,7 +100,7 @@ def upload(ctx: click.Context) -> None:
     # remove files which exist in board but not exist in dist
     #   (except on_board.delete_ignore and on_board.meta_file_path)
 
-    delete_ignore_patterns = config["on_board"].get("delete_ignore", None)
+    delete_ignore_patterns = config["on_board"].get("ignore", None)
     if delete_ignore_patterns is None:
         delete_ignore_patterns = []
     delete_ignore_patterns.append(config["on_board"]["meta_file_path"])
