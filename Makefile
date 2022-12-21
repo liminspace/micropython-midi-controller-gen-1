@@ -1,4 +1,4 @@
-.PHONY: help pre_commit clean_pycache collect mpy_compile detect upload reset_hard release
+.PHONY: help lint clean_pycache collect mpy_compile detect upload reset_hard release
 
 .DEFAULT_GOAL := release
 

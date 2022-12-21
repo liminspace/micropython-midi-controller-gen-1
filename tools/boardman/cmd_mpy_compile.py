@@ -46,23 +46,17 @@ def mpy_compile(ctx: click.Context) -> None:
         found_file_rel_path = found_file_path.relative_to(dist_path)
 
         if include_rules:
-            is_included = False
-            for pattern in include_rules:
-                if match_patterns(pattern=pattern, path=found_file_rel_path):
-                    is_included = True
-                    break
-
+            is_included = any(
+                match_patterns(pattern=pattern, path=found_file_rel_path) for pattern in include_rules
+            )
             if not is_included:
                 click.echo(f"    🟡ignore: {found_file_rel_path} [not included]")
                 continue
 
         if exclude_rules:
-            is_excluded = False
-            for pattern in exclude_rules:
-                if match_patterns(pattern=pattern, path=found_file_rel_path):
-                    is_excluded = True
-                    break
-
+            is_excluded = any(
+                match_patterns(pattern=pattern, path=found_file_rel_path) for pattern in exclude_rules
+            )
             if is_excluded:
                 click.echo(f"    🟡ignore:  {found_file_rel_path} [excluded]")
                 continue

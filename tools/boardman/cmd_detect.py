@@ -18,10 +18,11 @@ def detect() -> Optional[Tuple[str, ListPortInfo]]:
     detected_devices: List[Tuple[str, ListPortInfo]] = []
     devices: List[ListPortInfo] = comports()
     for device in devices:
-        for possible_device_name, checkers in DEVICE_CHECKERS.items():
-            if any(checker(device) for checker in checkers):
-                detected_devices.append((possible_device_name, device))
-
+        detected_devices.extend(
+            (possible_device_name, device)
+            for possible_device_name, checkers in DEVICE_CHECKERS.items()
+            if any(checker(device) for checker in checkers)
+        )
     if not detected_devices:
         click.echo("❌ No devices detected", err=True)
         raise click.Abort()
