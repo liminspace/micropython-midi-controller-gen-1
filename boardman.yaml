@@ -20,7 +20,7 @@ mpy_compiler:
   # compiling py files into mpy
 
   # path to the mpy-cross cli
-  cli_path: micropython-1.19.1/mpy-cross/mpy-cross
+  cli_path: mpy-cross
 
   # mpy-cross options
   emit: bytecode  # -X emit=bytecode

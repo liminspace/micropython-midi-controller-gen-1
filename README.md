@@ -21,11 +21,5 @@ Enable the options and set 3.6.
 ## MPY-Cross
 
 ```bash
-$ micropython_ver=1.19.1 \
- && curl -L -o micropython-$micropython_ver.zip "https://github.com/micropython/micropython/archive/refs/tags/v$micropython_ver.zip" \
- && unzip micropython-$micropython_ver.zip \
- && rm -f micropython-$micropython_ver.zip \
- && cd micropython-$micropython_ver/mpy-cross \
- && make \
- && cd ../..
+$ boardman get-mpy-compiler
 ```

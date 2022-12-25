@@ -8,10 +8,6 @@ __pycache__/
 # local configurations
 .python-version
 
-# micropython repo
-micropython-*.zip
-micropython-*/
-
 # dist
 dist/
 
@@ -20,3 +16,6 @@ tmp/
 
 # poetry
 poetry.toml
+
+# mpy-compilers
+mpy-cross
